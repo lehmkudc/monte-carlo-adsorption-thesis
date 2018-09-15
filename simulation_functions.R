@@ -86,7 +86,7 @@ move <- function( X.h , X.c , delx , Space , Temp){
     
     DU <- U.n - U.o # Difference in potential caused by move
     p <- min( c( 1, exp( DU/Temp) ) )
-  }
+  } 
   
   if( runif(1) <= p){
     X.h[id.o,] <- X.n
@@ -130,7 +130,7 @@ remove <- function( X.h , X.c , Space , Temp , V, P , lilkb){
   DU <- -sum(U.h) - sum(U.c)
   
   p <- min ( c(1 ,nrow(X.h)*lilkb*Temp/V/P*exp( -DU/Temp ) ))
-  }
+  } 
   
   if( runif(1) <= p){
     X.h <- X.h[-id.r,]

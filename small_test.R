@@ -1,7 +1,8 @@
 rm( list=ls())
 library(scatterplot3d)
 library(rgl)
-source('Thesis/simulation_functions.R')
+setwd('C:/Users/lehmkudc/monte-carlo-adsorption-thesis')
+source('simulation_functions.R')
 
 #============================================================
 # Geographic Description of Unit Cell and Initial Particle locations
@@ -10,17 +11,21 @@ X.c <- 14.2*matrix( c( seq(10)/10 , rep(0.5,10), rep(0.5,10),
                        rep(0.5,10), rep(0.5,10), seq(10)/10 ),
                     ncol=3, byrow=F)
 
-Space <-  c( max(X.c[,1]), max(X.c[,2]), max(X.c[,3]) )
+##X.c <- 14.2*matrix( c(0.5,0.5,0.5,0.5,0.5,0.5), ncol=3, byrow=F)
 
-X.h <- Space*matrix( c(0.5,0.5,0.6,
-                       0.1,0.5,0.6,
+Space <-  c( 14.2, 14.2, 14.2 )
+
+##X.c <- 14.2*matrix( c(0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5), ncol=3, byrow=F)
+
+X.h <- Space*matrix( c(0.51,0.51,0.6,
+                       0.1,0.51,0.6,
                        0.2,0.7,0.4), 
                      nrow=3,ncol=3, byrow=TRUE)
 #============================================================
 # Simulation-Specific Variables
 b.move <-  0.1
-b.add <-  0.90
-delx <- Space/10
+b.add <-  0.50
+delx <- Space/5
 iters <- 10000
 #==============================================================
 # Physical Parameters of System
@@ -62,3 +67,4 @@ for (i in 1:iters){
 #==================================================================
 # Visualization and Ensemble Space
 plot3d(X.h)
+
