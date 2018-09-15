@@ -25,7 +25,14 @@ The most critical assumption we use for monte carlo step wise simulation is the 
 
 The Grand Canonical:  
 
-The Notion of Particle Location Probability:  
-While we have utilities to track individual physics of particles in terms of velocity, location, acceleration, etc., doing so requires so much more processing power that our simulation becomes useless. Instead of managing this transport phenomena, we are instead only tracking locations of particles using probabilities. These probabilites of locations are determined by potential energy (in this case the Lennard-Jones potential energy funciton).
+The Trial Move:
+Our simulation occurs in iterative steps called "Trial Moves". At each trial move, a particle can be moved, added, or removed based on some probability. Upon a theoretically "sufficient" number of trial moves, the simulation should adequately model a real physical system. These trial moves are not a measure of time in any way, and should not be considered as such. They are merely a step in a calculation hopefully towards reaching a finished answer. 
 
+Particle Location Probability:  
+While we have utilities to track individual physics of particles in terms of velocity, location, acceleration, etc., doing so requires so much more processing power that our simulation becomes useless. Instead of managing this with particle physics, we are instead only tracking locations of particles at various steps of the simulation, with each step being taken based on a probability of trial move. These probabilites of locations are determined by potential energy (in this case the Lennard-Jones potential energy funciton).
 
+Potential Energy:
+Between two particles, there exists some amount of interaction between them depending on the distance between them. To model the amount of attractive and repulsive forces they exert on eachother, we are using the Lennard-Jones potential energy. The higher the potential energy between these particles, the more unstable that system is and the more unlikely that arrangement is likely to occur. In general, when a trial move causes an increase in potential energy, the move is less likely to occur. This also means that a trial move which increases the overall stability of the system is more likely to occur. In the case of this simulation, we are keeping track of the potential energy shift between a given particle and all other particles in our unit cell.
+
+Monte Carlo Markov Chain:
+For our simulation, we are considering the simulation to be a "Markov Chain", where every step of our system depends entirely on the state of the system before the step. In other words, our simulation does not have "memory" and only determines the liklihood of a trial move using the information available "right then."
